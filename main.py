@@ -62,7 +62,7 @@ def searchGoods(cursor, store_name):
         # 获取所有记录列表
         results = cursor.fetchall()
         # 打印结果
-        print("Search goods result is %s" % (str(results)))
+        print("SEARCH::searchGoods:: Search goods result is %s" % (str(results)))
         if str(results) == '()':
             return str(results)
         return None
