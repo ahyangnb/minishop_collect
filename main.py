@@ -22,7 +22,7 @@ headersData = {
     }
 
 # 根据类别获取商品列表
-def getGoodsDet(id=16347):
+def getGoodsDet(id=16820):
     url = 'https://bjsc.szbaoly.com/api/agent/getGoodsDetail?id=' + str(
         id) + '&selectType=0&sceneType=&sceneId='
     # 请求表单数据
@@ -53,51 +53,6 @@ def getCategoryList():
     content = json.loads(response.text)
     print("HTTP::getGoodsListOfCategory::" + str(content))
 
-
-def jsonOption():
-    mockJson = '''{
-	"msg": "操作成功！",
-	"result": {
-		"boxNum": 1,
-		"canBoxBuy": 0,
-		"canUpCm": 1,
-		"canUpSm": 1,
-		"code": "CPZG01",
-		"currVipPrice": 108,
-		"detailImgs": "["75d024791fec4f908e097d1bd09dceae.png","ba4fb8852ea04a40ad7ef143eb275992.jpg"]",
-		"forbidBuyArea": "",
-		"goodsId": 16347,
-		"goodsVideo": "",
-		"id": 18746,
-		"imgs": "["9a88be48f7bd429e88e2d3cce6832740.jpg","182543d86478464ab37e48435feec615.jpg","84d6bc5fb2b64c748b70eefcb6406e11.jpg","9049b92c9db144dda14e4fc5f49451f1.jpg"]",
-		"itemMainImg": "beeb7acad249427989e59e0fcd8c7e95.jpg",
-		"marketPrice": 999.00,
-		"minBuyNum": 1,
-		"name": "格卡诺6.8L家用大容量空气炸锅GKN-KQZG-16（珍珠白）",
-		"piecesPerBox": "否",
-		"plusStep": 1,
-		"remoteAreaFreight": "",
-		"sales": 4096,
-		"specInfo": "{"颜色":"珍珠白"}",
-		"specJson": "{"颜色":["珍珠白"]}",
-		"state": 1,
-		"stock": 381,
-		"supplierFreightPayer": 2,
-		"supplierType": 1,
-		"title": "格卡诺6.8L家用大容量空气炸锅GKN-KQZG-16",
-		"titleIcon": "[]",
-		"type": 1,
-		"unit": "台",
-		"vip0Price": 133
-	},
-	"code": 0
-}'''
-    # use mock json to test load.
-    content = json.loads(mockJson)
-    # use "[" and "]" center input key to fetch value.
-    print("HTTP::jsonOption::" + str(content))
-
-
 def searchGoods(cursor, store_name):
     # SQL 查询语句
     sql = "SELECT * FROM `eb_store_product` WHERE store_name = '%s'" % (store_name)
@@ -108,7 +63,9 @@ def searchGoods(cursor, store_name):
         results = cursor.fetchall()
         # 打印结果
         print("Search goods result is %s" % (str(results)))
-        return str(results)
+        if str(results) == '()':
+            return str(results)
+        return None
     except:
         print("Error: unable to fetch data")
         return None
