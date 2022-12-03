@@ -1,9 +1,7 @@
 import requests  # 导入requests包
 import json
 
-
 token = "a8b8ea51353e49c1ac23039e4586969d"
-
 # 根据类别获取商品列表
 def getGoodsListOfCategory(current=1, twoCategoryId=5):
     url = 'https://bjsc.szbaoly.com/api/agent/pageGoods?current=' + str(current) + '&size=10&total=-1&twoCategoryId=' + str(twoCategoryId) + '&keyword='
@@ -57,6 +55,11 @@ def getCategoryList():
     content = json.loads(response.text)
     print("HTTP::getGoodsListOfCategory::"+str(content))
 
+def jsonOption():
+    # use mock json to test load.
+    content = json.loads('{"a":1,"data":[]}')
+    # use "[" and "]" center input key to fetch value.
+    print("HTTP::jsonOption::"+str(content['a']))
 
 if __name__ == '__main__':
-    getGoodsListOfCategory()
+    jsonOption()
