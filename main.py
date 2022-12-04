@@ -123,7 +123,7 @@ def innsertData(cursor, db, goodsData):
         goodsData['name'],
         goodsData['name'],
         '','',
-        '4', str(goodsData['vip0Price']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']), '0.00',
+        '4', str(goodsData['marketPrice']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']), '0.00',
         # unit_name
         goodsData['unit'],
         0, goodsData['sales'], goodsData['stock'], 0, 1, 1, 1, 1, 0,
