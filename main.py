@@ -2,7 +2,7 @@ import requests  # 导入requests包
 import json
 import pymysql
 
-token = "a11eef2679854758bf1d5ee5c168e26a"
+token = "cdf054618f234ecc9e34c1ad02f11188"
 headersData = {
     "Host": "bjsc.szbaoly.com",
     "appId": "wxeed6d656b89aeef3",
@@ -22,6 +22,10 @@ headersData = {
 }
 
 
+def get_img_h1(url):
+    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url) + '?x-oss-process=style/h1'
+
+
 # 根据类别获取商品列表
 def getGoodsDet(id=16820):
     url = 'https://bjsc.szbaoly.com/api/agent/getGoodsDetail?id=' + str(
@@ -31,6 +35,8 @@ def getGoodsDet(id=16820):
     # 将Json格式字符串转字典
     content = json.loads(response.text)
     print("HTTP::getGoodsDet::" + str(content))
+    if content['code'] != 200 & content['code'] != 0:
+        return None
     return content['result']
 
 
@@ -74,7 +80,10 @@ def searchGoods(cursor, store_name):
 
 
 def innsertData(cursor, db, goodsData):
-
+    sliderImageList = goodsData['imgs']
+    res = sliderImageList.strip('][').split(', ')
+    # Result and its type
+    print("final list", res)
     # SQL 插入语句
     sql = """INSERT INTO `eb_store_product` (`mer_id`, `image`, `recommend_image`, `slider_image`, `store_name`, `store_info`
     , `keyword`, `bar_code`, `cate_id`, `price`, `vip_price`, `ot_price`, `postage`, `unit_name`,
@@ -88,7 +97,7 @@ def innsertData(cursor, db, goodsData):
  , '%s', '%s', '%s', %s, %s, '%s',
   '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s');""" % (
         # Real value inner.
-        0, 'https://data44.wuht.net//uploads/attach/2022/01/15/8a2d668e1b8fde3ed9422c242eedbb32.jpg',
+        0, get_img_h1(goodsData['itemMainImg']),
         '',
         '[\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/8a2d668e1b8fde3ed9422c242eedbb32.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/b4dc68ca453c74fda4ffcf385b0d4414.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/76559ec8017c8ac68ea5ecac8145b56c.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/409219640e8cd3b347c306b566785f2d.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/742ec1ba074a8cc3a95839bb230c4244.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/680b6fb7bbbcba59bb8fd015b63413c0.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/1294869126a770d8519686eec84c9734.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/c3936b8d5ff3195edda9c3427c18a7d3.jpg\"]',
         goodsData['name'],
