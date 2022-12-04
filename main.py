@@ -104,6 +104,7 @@ def innsertData(cursor, db, goodsData):
     print("result_img_list value of json is ", dump_data)
 
     # SQL inner oprate.
+    import time
     sql = """INSERT INTO `eb_store_product` (`mer_id`, `image`, `recommend_image`, `slider_image`, `store_name`, `store_info`
     , `keyword`, `bar_code`, `cate_id`, `price`, `vip_price`, `ot_price`, `postage`, `unit_name`,
      `sort`, `sales`, `stock`, `is_show`, `is_hot`, `is_benefit`, `is_best`, `is_new`, `is_virtual`,
@@ -121,12 +122,26 @@ def innsertData(cursor, db, goodsData):
         str(dump_data),
         goodsData['name'],
         goodsData['name'],
-        '',
-        '',
-        '4', '15.90', '0.00', '0.00', '0.00', goodsData['unit'],
-        0, 0, 400, 1, 1, 1, 1, 1, 0, 0, 1642241487, 0, 0, 0, '0.00', '15.90', 0, 0, 1, 0, 0, 0, 0, '', '', '', 1, 1,
-        '0,1,2,3', '1025349510439', '', '', '',
-        0, 0, 0, 0, 0, '1,2', 3, '[]',
+        '','',
+        '4', str(goodsData['vip0Price']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']), '0.00',
+        # unit_name
+        goodsData['unit'],
+        0, goodsData['sales'], goodsData['stock'], 0, 1, 1, 1, 1, 0,
+        # virtual_type
+        0,
+        # add_time   1642241487
+        time.time(), 1, 0, 0, '0.00',
+        # cost
+        str(goodsData['currVipPrice']), 0, 0, 1, 0, 1, 0, 0, '', '', '', 1,
+        # todo spec_type 规格 0单 1多
+        1,
+        '0,1,2,3',
+        # spu
+        str(goodsData['goodsId']), '', '', '',
+        # vip_product 是否会员专属商品
+        0, 0, 0, 0, 0,
+        # logistics
+        '1,2', 3, '[]',
     )
     try:
         print("Start innert Data.")
