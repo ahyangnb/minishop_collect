@@ -1,8 +1,10 @@
+import sys
+
 import requests  # 导入requests包
 import json
 import pymysql
 
-token = "cdf054618f234ecc9e34c1ad02f11188"
+token = "ed4eb3db76374bc7885e5cfc454224e0"
 headersData = {
     "Host": "bjsc.szbaoly.com",
     "appId": "wxeed6d656b89aeef3",
@@ -23,7 +25,7 @@ headersData = {
 
 
 def get_img_h1(url):
-    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url) + '?x-oss-process=style/h1'
+    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"','') + '?x-oss-process=style/h1'
 
 
 # 根据类别获取商品列表
@@ -80,11 +82,28 @@ def searchGoods(cursor, store_name):
 
 
 def innsertData(cursor, db, goodsData):
-    sliderImageList = goodsData['imgs']
-    res = sliderImageList.strip('][').split(', ')
+    # result list of img.
+    result_img_list = []
+    slider_image_list = goodsData['imgs']
+
+    if ', ' in slider_image_list:
+        res = slider_image_list.strip('][').split(', ')
+    else:
+        res = slider_image_list.strip('][').split(',')
+
     # Result and its type
-    print("final list", res)
-    # SQL 插入语句
+    for str_item in res:
+        str_item_new = get_img_h1(str_item)
+        result_img_list.append(str_item_new)
+
+    # print the result.
+    print("result_img_list value is ", str(result_img_list))
+
+    # dump data
+    dump_data = json.dumps(result_img_list)
+    print("result_img_list value of json is ", dump_data)
+
+    # SQL inner oprate.
     sql = """INSERT INTO `eb_store_product` (`mer_id`, `image`, `recommend_image`, `slider_image`, `store_name`, `store_info`
     , `keyword`, `bar_code`, `cate_id`, `price`, `vip_price`, `ot_price`, `postage`, `unit_name`,
      `sort`, `sales`, `stock`, `is_show`, `is_hot`, `is_benefit`, `is_best`, `is_new`, `is_virtual`,
@@ -99,7 +118,7 @@ def innsertData(cursor, db, goodsData):
         # Real value inner.
         0, get_img_h1(goodsData['itemMainImg']),
         '',
-        '[\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/8a2d668e1b8fde3ed9422c242eedbb32.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/b4dc68ca453c74fda4ffcf385b0d4414.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/76559ec8017c8ac68ea5ecac8145b56c.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/409219640e8cd3b347c306b566785f2d.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/742ec1ba074a8cc3a95839bb230c4244.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/680b6fb7bbbcba59bb8fd015b63413c0.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/1294869126a770d8519686eec84c9734.jpg\",\"https:\\/\\/data44.wuht.net\\/\\/uploads\\/attach\\/2022\\/01\\/15\\/c3936b8d5ff3195edda9c3427c18a7d3.jpg\"]',
+        str(dump_data),
         goodsData['name'],
         goodsData['name'],
         '',
@@ -117,6 +136,7 @@ def innsertData(cursor, db, goodsData):
         db.commit()
         print("data innser success.")
     except:
+        print("[data innser except.] Oops!", sys.exc_info()[0], "occurred.")
         # 如果发生错误则回滚
         db.rollback()
 
