@@ -4,7 +4,7 @@ import requests  # 导入requests包
 import json
 import pymysql
 
-token = "ed4eb3db76374bc7885e5cfc454224e0"
+token = "0d4275b1633d445d9a28e800f4ae5a96"
 headersData = {
     "Host": "bjsc.szbaoly.com",
     "appId": "wxeed6d656b89aeef3",
@@ -25,7 +25,7 @@ headersData = {
 
 
 def get_img_h1(url):
-    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"','') + '?x-oss-process=style/h1'
+    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/h1'
 
 
 # 根据类别获取商品列表
@@ -81,7 +81,7 @@ def searchGoods(cursor, store_name):
         return None
 
 
-def innsertData(cursor, db, goodsData):
+def get_det_slider_img_list(goodsData):
     # result list of img.
     result_img_list = []
     slider_image_list = goodsData['imgs']
@@ -95,14 +95,33 @@ def innsertData(cursor, db, goodsData):
     for str_item in res:
         str_item_new = get_img_h1(str_item)
         result_img_list.append(str_item_new)
-
-    # print the result.
-    print("result_img_list value is ", str(result_img_list))
-
     # dump data
-    dump_data = json.dumps(result_img_list)
-    print("result_img_list value of json is ", dump_data)
+    dump_data_of_img = json.dumps(result_img_list)
+    print("[result_img_list] value of json is ", dump_data_of_img)
+    return dump_data_of_img
 
+
+def get_det_decription_img_list(goodsData):
+    # result list of img.
+    result_des_img_list = []
+    des_image_list = goodsData['detailImgs']
+
+    if ', ' in des_image_list:
+        res = des_image_list.strip('][').split(', ')
+    else:
+        res = des_image_list.strip('][').split(',')
+
+    # Result and its type
+    for str_item in res:
+        str_item_new = get_img_h1(str_item)
+        result_des_img_list.append(str_item_new)
+    # dump data
+    dump_data_of_des_img = json.dumps(result_des_img_list)
+    print("[dump_data_of_des_img] value of json is ", dump_data_of_des_img)
+    return dump_data_of_des_img
+
+
+def innsertData(cursor, db, goodsData):
     # SQL inner oprate.
     import time
     sql = """INSERT INTO `eb_store_product` (`mer_id`, `image`, `recommend_image`, `slider_image`, `store_name`, `store_info`
@@ -119,10 +138,10 @@ def innsertData(cursor, db, goodsData):
         # Real value inner.
         0, get_img_h1(goodsData['itemMainImg']),
         '',
-        str(dump_data),
+        str(get_det_slider_img_list(goodsData)),
         goodsData['name'],
         goodsData['name'],
-        '','',
+        '', '',
         '4', str(goodsData['marketPrice']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']), '0.00',
         # unit_name
         goodsData['unit'],
@@ -149,11 +168,42 @@ def innsertData(cursor, db, goodsData):
         cursor.execute(sql)
         # 提交到数据库执行
         db.commit()
-        print("data innser success.")
+        print("innert Data success.")
+
+        goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
+        print("data innser success. id is ", goods_result_id)
+        return goods_result_id
     except:
         print("[data innser except.] Oops!", sys.exc_info()[0], "occurred.")
         # 如果发生错误则回滚
         db.rollback()
+        return None
+
+
+def get_insert_goods_id(cursor, store_name):
+    # SQL 查询语句
+    sql = "SELECT * FROM `eb_store_product` WHERE store_name = '%s'" % (store_name)
+    try:
+        # 执行SQL语句
+        cursor.execute(sql)
+        # 获取所有记录列表
+        results = cursor.fetchone()
+        # 打印结果
+        print("SEARCH::get_insert_goods_id:: Search goods result is %s" % (str(results[0])))
+        if str(results) == '()':
+            return None
+        return results[0]
+    except:
+        print("Error[get_insert_goods_id]: unable to fetch data", sys.exc_info()[0], "occurred.")
+        return None
+    # # 使用 execute()  方法执行 SQL 查询
+    # cursor.execute("SELECT * FROM eb_store_product WHERE store_name='%s';" % (goods_name))
+    # # 使用 fetchone() 方法获取单条数据.
+    # data = cursor.fetchone()
+    # return data['id']
+
+def insert_des(goods_id):
+    print('When insert des data of id ', goods_id)
 
 
 def optiomSql(goodsData):
@@ -172,9 +222,13 @@ def optiomSql(goodsData):
     search_goods_result = searchGoods(cursor, goodsData['name'])
     if search_goods_result is not None:
         print("Can inner data")
-        innsertData(cursor, db, goodsData)
+        goods_id = innsertData(cursor, db, goodsData)
+        if goods_id is not None:
+            insert_des(goods_id)
     else:
-        print("Un need ")
+        print("Un need ",goodsData['name'])
+        goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
+        print("[Un need] already contain", goods_result_id)
     # 关闭数据库连接
     db.close()
 
