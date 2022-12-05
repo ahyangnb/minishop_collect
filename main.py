@@ -115,10 +115,7 @@ def get_det_decription_img_list(goodsData):
     for str_item in res:
         str_item_new = get_img_h1(str_item)
         result_des_img_list.append(str_item_new)
-    # dump data
-    dump_data_of_des_img = json.dumps(result_des_img_list)
-    print("[dump_data_of_des_img] value of json is ", dump_data_of_des_img)
-    return dump_data_of_des_img
+    return result_des_img_list
 
 
 def innsertData(cursor, db, goodsData):
@@ -202,8 +199,18 @@ def get_insert_goods_id(cursor, store_name):
     # data = cursor.fetchone()
     # return data['id']
 
-def insert_des(goods_id):
+def insert_des(goods_id, goodsData):
     print('When insert des data of id ', goods_id)
+    get_des_img_str = ''
+
+    print("length ",len(get_det_decription_img_list(goodsData)))
+    for currenUrl in get_det_decription_img_list(goodsData):
+        get_des_img_str += '<p><img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"  src="'+currenUrl+'"/></p>'
+
+    print('[insert_des] get_des_img_str is ', get_des_img_str)
+    # get_des_img_str
+    #
+
 
 
 def optiomSql(goodsData):
@@ -224,7 +231,7 @@ def optiomSql(goodsData):
         print("Can inner data")
         goods_id = innsertData(cursor, db, goodsData)
         if goods_id is not None:
-            insert_des(goods_id)
+            insert_des(goods_id,goodsData)
     else:
         print("Un need ",goodsData['name'])
         goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
