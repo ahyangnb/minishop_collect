@@ -1,3 +1,4 @@
+import html
 import sys
 
 import requests  # 导入requests包
@@ -199,18 +200,37 @@ def get_insert_goods_id(cursor, store_name):
     # data = cursor.fetchone()
     # return data['id']
 
-def insert_des(goods_id, goodsData):
+
+def insert_des(goods_id, goodsData,cursor, db):
     print('When insert des data of id ', goods_id)
     get_des_img_str = ''
 
-    print("length ",len(get_det_decription_img_list(goodsData)))
+    print("length ", len(get_det_decription_img_list(goodsData)))
     for currenUrl in get_det_decription_img_list(goodsData):
-        get_des_img_str += '<p><img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"  src="'+currenUrl+'"/></p>'
-
+        get_des_img_str += '<p><img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"  src="' + currenUrl + '"/></p>'
     print('[insert_des] get_des_img_str is ', get_des_img_str)
-    # get_des_img_str
-    #
 
+    desHtmlResult = html.escape(get_des_img_str)
+    print('[insert_des] html is ', )
+    insert_des_sql(goods_id, desHtmlResult,cursor,db)
+
+
+def insert_des_sql(goods_id, desHtmlResult,cursor, db):
+    sql = '''INSERT INTO `eb_store_product_description` (`product_id`, `description`, `type`) VALUES
+(%s, '%s', 0);''' % (goods_id,desHtmlResult)
+    try:
+        print("Start innert des Data.")
+        # 执行sql语句
+        cursor.execute(sql)
+        # 提交到数据库执行
+        db.commit()
+        print("innert des Data success.")
+        return 1
+    except:
+        print("[data innser except.] Oops!", sys.exc_info()[0], "occurred.")
+        # 如果发生错误则回滚
+        db.rollback()
+        return None
 
 
 def optiomSql(goodsData):
@@ -231,9 +251,9 @@ def optiomSql(goodsData):
         print("Can inner data")
         goods_id = innsertData(cursor, db, goodsData)
         if goods_id is not None:
-            insert_des(goods_id,goodsData)
+            insert_des(goods_id, goodsData,cursor, db)
     else:
-        print("Un need ",goodsData['name'])
+        print("Un need ", goodsData['name'])
         goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
         print("[Un need] already contain", goods_result_id)
     # 关闭数据库连接
