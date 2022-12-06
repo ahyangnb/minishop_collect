@@ -51,6 +51,11 @@ def getGoodsDet(id=13261):
         return None
     return content['result']
 
+# 规格处理
+# def getProp():
+#     # https://bjsc.szbaoly.com/api/agent/getGoodsItemDetailById?id=13261&type=1
+#     return 1
+
 
 # 根据类别获取商品列表
 def getGoodsListOfCategory(current=1, twoCategoryId=5):
@@ -156,7 +161,9 @@ def innsertData(cursor, db, goodsData):
         '4', str(goodsData['marketPrice']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']), '0.00',
         # unit_name
         goodsData['unit'],
-        0, goodsData['sales'], goodsData['stock'], 0, 1, 1, 1, 1, 0,
+        0, goodsData['sales'], goodsData['stock'],
+        # is_show
+        0, 0, 0, 0, 0, 0,
         # virtual_type
         0,
         # add_time   1642241487
