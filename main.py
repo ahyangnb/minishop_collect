@@ -5,6 +5,11 @@ import requests  # 导入requests包
 import json
 import pymysql
 
+# 请求的类别id
+twoCategoryId = 607
+# 存储到自己的服务器的类别id
+storeCategoryId = '40'
+
 token = "15ad6ec4ac214f13b58caa5f3d6445a8"
 headersData = {
     "Host": "bjsc.szbaoly.com",
@@ -27,10 +32,14 @@ headersData = {
 
 def get_img_h1(url):
     return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/h1'
+
+
 def get_img_des(url):
     return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/gd'
+
+
 def get_video_full_url(url):
-    if url is None :
+    if url is None:
         return ''
     if url == '':
         return url
@@ -51,6 +60,7 @@ def getGoodsDet(id=13261):
         return None
     return content['result']
 
+
 # 规格处理
 # def getProp():
 #     # https://bjsc.szbaoly.com/api/agent/getGoodsItemDetailById?id=13261&type=1
@@ -58,7 +68,7 @@ def getGoodsDet(id=13261):
 
 
 # 根据类别获取商品列表
-def getGoodsListOfCategory(current=1, twoCategoryId=5):
+def getGoodsListOfCategory(current=1):
     url = 'https://bjsc.szbaoly.com/api/agent/pageGoods?current=' + str(
         current) + '&size=10&total=-1&twoCategoryId=' + str(twoCategoryId) + '&keyword='
     # 请求表单数据
@@ -66,16 +76,36 @@ def getGoodsListOfCategory(current=1, twoCategoryId=5):
     # 将Json格式字符串转字典
     content = json.loads(response.text)
     print("HTTP::getGoodsListOfCategory::" + str(content))
+    return content
 
 
-# 根据类别获取商品列表
-def getCategoryList():
-    url = 'https://bjsc.szbaoly.com/api/agent/pageGoods?current=1&size=10&total=-1&twoCategoryId=4&keyword='
-    # 请求表单数据
-    response = requests.post(url, headers=headersData)
-    # 将Json格式字符串转字典
-    content = json.loads(response.text)
-    print("HTTP::getGoodsListOfCategory::" + str(content))
+def fetchCategory(cursor, db, cateData):
+    if cateData['result']['records'] is None:
+        return 0
+    if cateData['result']['records'] == '[]':
+        return 0
+    print('fetch category All data ', cateData['result']['records'])
+    records = cateData['result']['records']
+    for currentGoods in records:
+        goodsData = getGoodsDet(currentGoods['id'])
+        search_goods_result = searchGoods(cursor, goodsData['name'])
+        if search_goods_result is not None:
+            print("Can inner data")
+            goods_id = innsertData(cursor, db, goodsData)
+            if goods_id is not None:
+                insert_des(goods_id, goodsData, cursor, db)
+        else:
+            print("Un need ", goodsData['name'])
+            goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
+            print("[Un need] already contain", goods_result_id)
+
+        # avoid protect so sleep.
+        import time
+        sec_time = 1
+        print('sleep time:', str(sec_time), 'seconds')
+        time.sleep(sec_time)
+
+    return 1
 
 
 def searchGoods(cursor, store_name):
@@ -158,7 +188,8 @@ def innsertData(cursor, db, goodsData):
         goodsData['name'],
         goodsData['name'],
         '', '',
-        '4', str(goodsData['marketPrice']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']), '0.00',
+        storeCategoryId, str(goodsData['marketPrice']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']),
+        '0.00',
         # unit_name
         goodsData['unit'],
         0, goodsData['sales'], goodsData['stock'],
@@ -224,7 +255,7 @@ def get_insert_goods_id(cursor, store_name):
     # return data['id']
 
 
-def insert_des(goods_id, goodsData,cursor, db):
+def insert_des(goods_id, goodsData, cursor, db):
     print('When insert des data of id ', goods_id)
     get_des_img_str = ''
 
@@ -235,12 +266,12 @@ def insert_des(goods_id, goodsData,cursor, db):
 
     desHtmlResult = html.escape(get_des_img_str)
     print('[insert_des] html is ', )
-    insert_des_sql(goods_id, desHtmlResult,cursor,db)
+    insert_des_sql(goods_id, desHtmlResult, cursor, db)
 
 
-def insert_des_sql(goods_id, desHtmlResult,cursor, db):
+def insert_des_sql(goods_id, desHtmlResult, cursor, db):
     sql = '''INSERT INTO `eb_store_product_description` (`product_id`, `description`, `type`) VALUES
-(%s, '%s', 0);''' % (goods_id,desHtmlResult)
+(%s, '%s', 0);''' % (goods_id, desHtmlResult)
     try:
         print("Start innert des Data.")
         # 执行sql语句
@@ -256,7 +287,7 @@ def insert_des_sql(goods_id, desHtmlResult,cursor, db):
         return None
 
 
-def optiomSql(goodsData):
+def optiomSql():
     # 打开数据库连接
     db = pymysql.connect(host='localhost',
                          user='root',
@@ -269,24 +300,17 @@ def optiomSql(goodsData):
     # 使用 fetchone() 方法获取单条数据.
     data = cursor.fetchone()
     print("Database version : %s " % data)
-    search_goods_result = searchGoods(cursor, goodsData['name'])
-    if search_goods_result is not None:
-        print("Can inner data")
-        goods_id = innsertData(cursor, db, goodsData)
-        if goods_id is not None:
-            insert_des(goods_id, goodsData,cursor, db)
-    else:
-        print("Un need ", goodsData['name'])
-        goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
-        print("[Un need] already contain", goods_result_id)
+    cateData = getGoodsListOfCategory()
+    fetchCategory(cursor, db, cateData)
     # 关闭数据库连接
     db.close()
 
 
 if __name__ == '__main__':
-    goodsResult = getGoodsDet()
-    if goodsResult is not None:
-        optiomSql(goodsResult)
+    optiomSql()
+    # goodsResult = getGoodsDet()
+    # if goodsResult is not None:
+    #     optiomSql()
 
     # jsonOption()
     # optiomSql()
