@@ -5,7 +5,7 @@ import requests  # 导入requests包
 import json
 import pymysql
 
-token = "0d4275b1633d445d9a28e800f4ae5a96"
+token = "15ad6ec4ac214f13b58caa5f3d6445a8"
 headersData = {
     "Host": "bjsc.szbaoly.com",
     "appId": "wxeed6d656b89aeef3",
@@ -27,10 +27,19 @@ headersData = {
 
 def get_img_h1(url):
     return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/h1'
+def get_img_des(url):
+    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/gd'
+def get_video_full_url(url):
+    if url is None :
+        return ''
+    if url == '':
+        return url
+    # http://oss-hxq-prod.szbaoly.com/bjsc/goods/2d2d32d0cd1d400c9e62b8b008d2f308.mp4
+    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '')
 
 
 # 根据类别获取商品列表
-def getGoodsDet(id=16820):
+def getGoodsDet(id=13261):
     url = 'https://bjsc.szbaoly.com/api/agent/getGoodsDetail?id=' + str(
         id) + '&selectType=0&sceneType=&sceneId='
     # 请求表单数据
@@ -96,6 +105,10 @@ def get_det_slider_img_list(goodsData):
     for str_item in res:
         str_item_new = get_img_h1(str_item)
         result_img_list.append(str_item_new)
+
+    # add main pic
+    result_img_list.append(goodsData['itemMainImg'])
+
     # dump data
     dump_data_of_img = json.dumps(result_img_list)
     print("[result_img_list] value of json is ", dump_data_of_img)
@@ -114,7 +127,7 @@ def get_det_decription_img_list(goodsData):
 
     # Result and its type
     for str_item in res:
-        str_item_new = get_img_h1(str_item)
+        str_item_new = get_img_des(str_item)
         result_des_img_list.append(str_item_new)
     return result_des_img_list
 
@@ -149,7 +162,10 @@ def innsertData(cursor, db, goodsData):
         # add_time   1642241487
         time.time(), 1, 0, 0, '0.00',
         # cost
-        str(goodsData['currVipPrice']), 0, 0, 1, 0, 1, 0, 0, '', '', '', 1,
+        str(goodsData['currVipPrice']), 0, 0, 1, 0, 1, 0, 0, '', '',
+        # video_link
+        get_video_full_url(goodsData['goodsVideo']),
+        1,
         # todo spec_type 规格 0单 1多
         1,
         '0,1,2,3',
