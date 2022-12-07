@@ -5,12 +5,14 @@ import requests  # 导入requests包
 import json
 import pymysql
 
-# 请求的类别id
-twoCategoryId = 607
+# 请求的类别id【59是康佳】
+twoCategoryId = 59
+# category page index.
+currentPage=8
 # 存储到自己的服务器的类别id
-storeCategoryId = '40'
+storeCategoryId = '24'
 
-token = "15ad6ec4ac214f13b58caa5f3d6445a8"
+token = "c0d088710824434183793bd3e3137df8"
 headersData = {
     "Host": "bjsc.szbaoly.com",
     "appId": "wxeed6d656b89aeef3",
@@ -68,9 +70,9 @@ def getGoodsDet(id=13261):
 
 
 # 根据类别获取商品列表
-def getGoodsListOfCategory(current=1):
+def getGoodsListOfCategory():
     url = 'https://bjsc.szbaoly.com/api/agent/pageGoods?current=' + str(
-        current) + '&size=10&total=-1&twoCategoryId=' + str(twoCategoryId) + '&keyword='
+        currentPage) + '&size=10&total=-1&twoCategoryId=' + str(twoCategoryId) + '&keyword='
     # 请求表单数据
     response = requests.post(url, headers=headersData, verify=False)
     # 将Json格式字符串转字典
