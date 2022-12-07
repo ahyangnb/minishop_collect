@@ -6,11 +6,9 @@ import json
 import pymysql
 
 # 请求的类别id【59是康佳】
-twoCategoryId = 59
-# category page index.
-currentPage=8
+twoCategoryId = 4
 # 存储到自己的服务器的类别id
-storeCategoryId = '24'
+storeCategoryId = '31'
 
 token = "c0d088710824434183793bd3e3137df8"
 headersData = {
@@ -70,7 +68,7 @@ def getGoodsDet(id=13261):
 
 
 # 根据类别获取商品列表
-def getGoodsListOfCategory():
+def getGoodsListOfCategory(currentPage):
     url = 'https://bjsc.szbaoly.com/api/agent/pageGoods?current=' + str(
         currentPage) + '&size=10&total=-1&twoCategoryId=' + str(twoCategoryId) + '&keyword='
     # 请求表单数据
@@ -302,8 +300,17 @@ def optiomSql():
     # 使用 fetchone() 方法获取单条数据.
     data = cursor.fetchone()
     print("Database version : %s " % data)
-    cateData = getGoodsListOfCategory()
+    currentPage = 1
+    maxPage = 1
+    cateData = getGoodsListOfCategory(currentPage)
+    maxPage = cateData['result']['pages']
     fetchCategory(cursor, db, cateData)
+
+    for index in range(maxPage):
+        currentPage = currentPage+1
+        cateDataInner = getGoodsListOfCategory(currentPage)
+        fetchCategory(cursor, db, cateDataInner)
+
     # 关闭数据库连接
     db.close()
 
