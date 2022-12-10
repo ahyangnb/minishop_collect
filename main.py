@@ -129,6 +129,9 @@ def searchGoods(cursor, store_name):
 def get_det_slider_img_list(goodsData):
     # result list of img.
     result_img_list = []
+    # add main pic
+    result_img_list.append(goodsData['itemMainImg'])
+
     slider_image_list = goodsData['imgs']
 
     if ', ' in slider_image_list:
@@ -140,9 +143,6 @@ def get_det_slider_img_list(goodsData):
     for str_item in res:
         str_item_new = get_img_h1(str_item)
         result_img_list.append(str_item_new)
-
-    # add main pic
-    result_img_list.append(goodsData['itemMainImg'])
 
     # dump data
     dump_data_of_img = json.dumps(result_img_list)
