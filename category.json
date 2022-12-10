@@ -1,0 +1,860 @@
+{
+  "msg": "操作成功！",
+  "result": [
+    {
+      "children": [
+        {
+          "id": 1315,
+          "img": "8880d8ed64f74c58879e6d48bbe0f435.png",
+          "isRecom": 0,
+          "name": "格卡诺",
+          "supId": 171
+        },
+        {
+          "id": 606,
+          "img": "16e7d1a37baf44bf8d4ef2256b751c85.png",
+          "isRecom": 0,
+          "name": "格兰仕",
+          "supId": 171
+        },
+        {
+          "id": 607,
+          "img": "c20ebd441b854dbfad1c521597e84c76.png",
+          "isRecom": 0,
+          "name": "志高",
+          "supId": 171
+        },
+        {
+          "id": 59,
+          "img": "8cfbc837e8224df78d813c6f46bc1a98.png",
+          "isRecom": 0,
+          "name": "KONKA康佳",
+          "supId": 171
+        },
+        {
+          "id": 623,
+          "img": "e4d580b3c62f4d4eb9f190cbbaf58629.png",
+          "isRecom": 0,
+          "name": "海尔",
+          "supId": 171
+        },
+        {
+          "id": 126,
+          "img": "ed76cbc500c549ab93566a90f9e5464b.png",
+          "isRecom": 0,
+          "name": "Midea美的",
+          "supId": 171
+        },
+        {
+          "id": 64,
+          "img": "320554d70a41401690e012dbab7f6727.png",
+          "isRecom": 0,
+          "name": "创维",
+          "supId": 171
+        },
+        {
+          "id": 165,
+          "img": "877436be3eef4041968aade3005d229b.png",
+          "isRecom": 0,
+          "name": "洁柔",
+          "supId": 171
+        },
+        {
+          "id": 1297,
+          "img": "97495f13a4104ee8b6b9f645f6b9df3c.jpg",
+          "isRecom": 0,
+          "name": "NERF品牌",
+          "supId": 171
+        },
+        {
+          "id": 1322,
+          "img": "23ece10d4d6e4e70905e1b46af75987a.jpg",
+          "isRecom": 0,
+          "name": "九阳",
+          "supId": 171
+        },
+        {
+          "id": 1202,
+          "img": "6ff99de81e80456cb5ccf6927cc793f7.jpg",
+          "isRecom": 0,
+          "name": "西屋",
+          "supId": 171
+        },
+        {
+          "id": 1192,
+          "img": "71fe8eb168214742999afa5acdb12706.png",
+          "isRecom": 0,
+          "name": "路易菲斯",
+          "supId": 171
+        },
+        {
+          "id": 86,
+          "img": "594fe1f4042948aaaf907e46f02ebf43.png",
+          "isRecom": 0,
+          "name": "德国康巴赫",
+          "supId": 171
+        },
+        {
+          "id": 489,
+          "img": "bb967ba6ee1e4998b187d727f6e175ef.png",
+          "isRecom": 0,
+          "name": "泸州老窖",
+          "supId": 171
+        },
+        {
+          "id": 577,
+          "img": "cb29cd592e0640a1964caedf342af9d5.png",
+          "isRecom": 0,
+          "name": "茅台",
+          "supId": 171
+        },
+        {
+          "id": 488,
+          "img": "8327b29191db413b9c9f07a0a194bdf0.png",
+          "isRecom": 0,
+          "name": "五粮液",
+          "supId": 171
+        },
+        {
+          "id": 99,
+          "img": "fd5fd12e3b884ab69cff9af4fcf3c266.jpg",
+          "isRecom": 0,
+          "name": "海天",
+          "supId": 171
+        },
+        {
+          "id": 143,
+          "img": "afd1001799284692a9ddb9c5b0a85d88.jpg",
+          "isRecom": 0,
+          "name": "百家鲜",
+          "supId": 171
+        },
+        {
+          "id": 807,
+          "img": "78267a973751440997e2da040e6c1e1a.png",
+          "isRecom": 0,
+          "name": "CK",
+          "supId": 171
+        },
+        {
+          "id": 616,
+          "img": "de96d517e3e14285bc27db2af2788acd.png",
+          "isRecom": 0,
+          "name": "施华洛世奇",
+          "supId": 171
+        },
+        {
+          "id": 642,
+          "img": "59bdb6e0ac4c416cbe711aa531626c9e.png",
+          "isRecom": 0,
+          "name": "小CK",
+          "supId": 171
+        },
+        {
+          "id": 1232,
+          "img": "da39a4af870348a7baff363a6e87f4f3.jpg",
+          "isRecom": 0,
+          "name": "爱登堡",
+          "supId": 171
+        },
+        {
+          "id": 1183,
+          "img": "f123e29e18554329a8241fb274387ed8.png",
+          "isRecom": 0,
+          "name": "澳洲袋鼠",
+          "supId": 171
+        },
+        {
+          "id": 78,
+          "img": "008a4af0d7524104a2d197feb441295c.png",
+          "isRecom": 0,
+          "name": "啄木鸟",
+          "supId": 171
+        },
+        {
+          "id": 657,
+          "img": "2b4e6a42b82f4acbaf74f10af92e0da1.png",
+          "isRecom": 0,
+          "name": "周六福",
+          "supId": 171
+        },
+        {
+          "id": 135,
+          "img": "1b27f427e4ef4f449c64dbbcae235eff.png",
+          "isRecom": 0,
+          "name": "TCL",
+          "supId": 171
+        },
+        {
+          "id": 146,
+          "img": "8b13d79036ac499f990f3ea90d65d383.jpg",
+          "isRecom": 0,
+          "name": "奥克斯",
+          "supId": 171
+        },
+        {
+          "id": 119,
+          "img": "1bb477ba079f41939d043e26facbd9ff.jpg",
+          "isRecom": 0,
+          "name": "慕思",
+          "supId": 171
+        },
+        {
+          "id": 1337,
+          "img": "8b4d1454679542569249ae608ec56977.jpg",
+          "isRecom": 0,
+          "name": "柯迈龙",
+          "supId": 171
+        },
+        {
+          "id": 609,
+          "img": "a4a83a1d243d40fa8ad3d83c3f234632.png",
+          "isRecom": 0,
+          "name": "佳胜达",
+          "supId": 171
+        },
+        {
+          "id": 1350,
+          "img": "71a18208247b4f148e2706852d461ed3.jpg",
+          "isRecom": 0,
+          "name": "SKG",
+          "supId": 171
+        },
+        {
+          "id": 131,
+          "img": "996f6f4b4fcd4c888c4d9e03c6a9aa3a.jpg",
+          "isRecom": 0,
+          "name": "惠而浦",
+          "supId": 171
+        }
+      ],
+      "id": 171,
+      "img": "",
+      "isRecom": 0,
+      "name": "大牌优选",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 4,
+          "img": "cb442dd089054849ac752776813f4274.jpg",
+          "isRecom": 1,
+          "name": " 厨房电器",
+          "supId": 194
+        },
+        {
+          "id": 5,
+          "img": "2ee3b958818046ab83a4511a7b15fd69.jpg",
+          "isRecom": 1,
+          "name": "生活电器",
+          "supId": 194
+        },
+        {
+          "id": 6,
+          "img": "e6a9941468e84a108b1c3566cd450fef.png",
+          "isRecom": 1,
+          "name": "保健电器",
+          "supId": 194
+        },
+        {
+          "id": 1318,
+          "img": "f175a47ac1d24e2a82fc9bac546f5186.jpg",
+          "isRecom": 0,
+          "name": "扫地机",
+          "supId": 194
+        },
+        {
+          "id": 2,
+          "img": "a4c3d2c102404890afab26d68b1a3855.png",
+          "isRecom": 1,
+          "name": "净水器",
+          "supId": 194
+        },
+        {
+          "id": 1,
+          "img": "08959d259a3f4626afe313f4fbb60e2b.png",
+          "isRecom": 1,
+          "name": "净化器",
+          "supId": 194
+        },
+        {
+          "id": 3,
+          "img": "3ff4f1c8b3094427a0fb70b3aaa0fb14.jpg",
+          "isRecom": 0,
+          "name": "两季电器",
+          "supId": 194
+        },
+        {
+          "id": 462,
+          "img": "cb516c62074b4e1081cf545e4a7383e0.jpg",
+          "isRecom": 0,
+          "name": "按摩椅",
+          "supId": 194
+        },
+        {
+          "id": 198,
+          "img": "33ad8b5bc77142ad9163a42a15c7594d.jpg",
+          "isRecom": 0,
+          "name": "其他配件",
+          "supId": 194
+        },
+        {
+          "id": 1330,
+          "img": "9ee6950bfc794f5f8c67175693ef2785.jpg",
+          "isRecom": 0,
+          "name": "净化器配件",
+          "supId": 194
+        },
+        {
+          "id": 1336,
+          "img": "b6af8c6b3e0a44c5a3580b1db836930b.jpg",
+          "isRecom": 0,
+          "name": "净水器配件",
+          "supId": 194
+        }
+      ],
+      "id": 194,
+      "img": "",
+      "isRecom": 0,
+      "name": "家用电器",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 7,
+          "img": "b2fa5fcfd995428f9854951a139877ff.png",
+          "isRecom": 1,
+          "name": "冰箱",
+          "supId": 1271
+        },
+        {
+          "id": 483,
+          "img": "099e0e5c761a47a8a98e5dc5e758dcab.jpg",
+          "isRecom": 1,
+          "name": "电视",
+          "supId": 1271
+        },
+        {
+          "id": 163,
+          "img": "6bb41adf1e1a4f6f941a6ca3313fb529.jpg",
+          "isRecom": 0,
+          "name": "空调",
+          "supId": 1271
+        },
+        {
+          "id": 486,
+          "img": "37412a0cd37d4f71b41c828bc3acbc98.jpg",
+          "isRecom": 1,
+          "name": "洗衣机",
+          "supId": 1271
+        },
+        {
+          "id": 432,
+          "img": "522ea031514e402d815ad82c2c8aecfa.jpg",
+          "isRecom": 0,
+          "name": "热水器",
+          "supId": 1271
+        },
+        {
+          "id": 1198,
+          "img": "343add8e2c304bbdb7e154aaafb75312.jpg",
+          "isRecom": 0,
+          "name": "厨房大电 ",
+          "supId": 1271
+        },
+        {
+          "id": 1345,
+          "img": "d377d53d34fe4651bbe17749c19a157e.jpg",
+          "isRecom": 0,
+          "name": "马桶卫浴",
+          "supId": 1271
+        },
+        {
+          "id": 1355,
+          "img": "1755f8cb2cc34a6d820baa83e6cbfc7e.jpg",
+          "isRecom": 0,
+          "name": "大电套装",
+          "supId": 1271
+        }
+      ],
+      "id": 1271,
+      "img": "",
+      "isRecom": 0,
+      "name": "大家电",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 184,
+          "img": "161324721c104680ab33d444a027604e.jpg",
+          "isRecom": 0,
+          "name": "美酒礼盒",
+          "supId": 183
+        },
+        {
+          "id": 185,
+          "img": "928b26e7a34a4b1b8076ba9c682672a1.jpg",
+          "isRecom": 0,
+          "name": "四季茗茶",
+          "supId": 183
+        },
+        {
+          "id": 513,
+          "img": "3eb450e1e3e14002bd5c178038383502.png",
+          "isRecom": 0,
+          "name": "大米粮油",
+          "supId": 183
+        },
+        {
+          "id": 484,
+          "img": "66cdc2464f6f471d993f7c354941ad37.jpg",
+          "isRecom": 0,
+          "name": "坚果礼盒",
+          "supId": 183
+        },
+        {
+          "id": 1272,
+          "img": "e56a090f32624744892907afcdd64430.jpg",
+          "isRecom": 0,
+          "name": "南北干货",
+          "supId": 183
+        },
+        {
+          "id": 1344,
+          "img": "94666c49e8044b26b0928c2d8381ee94.jpg",
+          "isRecom": 0,
+          "name": "热销零食",
+          "supId": 183
+        },
+        {
+          "id": 1316,
+          "img": "cdcbd6baca68488aadfc0a78f0cfef34.jpg",
+          "isRecom": 0,
+          "name": "牛奶冲调",
+          "supId": 183
+        },
+        {
+          "id": 196,
+          "img": "b47e440166ae48399846841a0dba61a8.jpg",
+          "isRecom": 0,
+          "name": "滋补养生",
+          "supId": 183
+        },
+        {
+          "id": 1339,
+          "img": "1eb5c181085244b8b28b22b380b40603.jpg",
+          "isRecom": 0,
+          "name": "调味酱料",
+          "supId": 183
+        }
+      ],
+      "id": 183,
+      "img": "",
+      "isRecom": 0,
+      "name": "食品酒水",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 191,
+          "img": "756e27ae8ead44c7914d02e38cf05426.jpg",
+          "isRecom": 0,
+          "name": "厨房用品",
+          "supId": 190
+        },
+        {
+          "id": 192,
+          "img": "ec5f8ce2ae874d74a346d5189cced78e.png",
+          "isRecom": 0,
+          "name": "生活日用",
+          "supId": 190
+        },
+        {
+          "id": 193,
+          "img": "45fc48f25f06432f827d5b9fe486bb37.png",
+          "isRecom": 0,
+          "name": "家居家纺",
+          "supId": 190
+        },
+        {
+          "id": 656,
+          "img": "bb998220788b4897b2e253b30cd5811c.png",
+          "isRecom": 0,
+          "name": "个护健康",
+          "supId": 190
+        },
+        {
+          "id": 1310,
+          "img": "994d423581474f0684805526cb92a42b.jpg",
+          "isRecom": 0,
+          "name": "个护家清",
+          "supId": 190
+        },
+        {
+          "id": 452,
+          "img": "a79f5b149d724cd1aed23785ee3b0999.jpg",
+          "isRecom": 0,
+          "name": "车载用品",
+          "supId": 190
+        },
+        {
+          "id": 1317,
+          "img": "496193cfccb14106aadfb78995fa88b0.jpg",
+          "isRecom": 0,
+          "name": "杯/碗/茶具",
+          "supId": 190
+        }
+      ],
+      "id": 190,
+      "img": "",
+      "isRecom": 0,
+      "name": "家居百货",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 862,
+          "img": "9585a5c84a8a4609b6972345862cc70e.jpg",
+          "isRecom": 0,
+          "name": "护肤",
+          "supId": 744
+        },
+        {
+          "id": 1238,
+          "img": "da152e5bb437442480ad273170709db3.jpg",
+          "isRecom": 0,
+          "name": "彩妆",
+          "supId": 744
+        },
+        {
+          "id": 1338,
+          "img": "5ec3984fb3bd4891bde50adbaad7108d.jpg",
+          "isRecom": 0,
+          "name": "护肤套装",
+          "supId": 744
+        },
+        {
+          "id": 1200,
+          "img": "471a0f9e97fa42069a7f38c98a95809e.jpg",
+          "isRecom": 0,
+          "name": "美容仪器",
+          "supId": 744
+        }
+      ],
+      "id": 744,
+      "img": "",
+      "isRecom": 0,
+      "name": "美妆护肤",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 187,
+          "img": "bb90069310124dd8ade518a7fc4bc2a5.jpg",
+          "isRecom": 0,
+          "name": "男性配饰",
+          "supId": 186
+        },
+        {
+          "id": 189,
+          "img": "61b0d6010be14d07ac77aba4a8fa415e.png",
+          "isRecom": 0,
+          "name": "轻奢名表",
+          "supId": 186
+        },
+        {
+          "id": 863,
+          "img": "e3085ab47b984bc7bb0006a4a78469de.jpg",
+          "isRecom": 0,
+          "name": "珠宝首饰",
+          "supId": 186
+        },
+        {
+          "id": 1184,
+          "img": "7831043db6c046bfb08500126cb6d0b1.jpg",
+          "isRecom": 0,
+          "name": "潮流包包",
+          "supId": 186
+        },
+        {
+          "id": 188,
+          "img": "ef9c25c44b9a434199237a6fa99a7a21.jpg",
+          "isRecom": 0,
+          "name": "拉杆箱",
+          "supId": 186
+        },
+        {
+          "id": 195,
+          "img": "56ebcfa6eb914b63ab9f970ee548c2eb.jpg",
+          "isRecom": 0,
+          "name": "双肩包",
+          "supId": 186
+        },
+        {
+          "id": 1340,
+          "img": "5df560bd71d84c88a229347c713c8bc4.jpg",
+          "isRecom": 0,
+          "name": "其他配饰",
+          "supId": 186
+        }
+      ],
+      "id": 186,
+      "img": "",
+      "isRecom": 0,
+      "name": "箱包配饰",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 429,
+          "img": "d93f735290c942d4960547d7e2e31b18.jpg",
+          "isRecom": 0,
+          "name": "喂养洗护",
+          "supId": 178
+        },
+        {
+          "id": 1332,
+          "img": "5b6ee69e13754a9c9d4ac5acb963df63.jpg",
+          "isRecom": 0,
+          "name": "智能手表",
+          "supId": 178
+        },
+        {
+          "id": 1333,
+          "img": "346a6ea2611f4184905ef77638b77368.jpg",
+          "isRecom": 0,
+          "name": "早教产品",
+          "supId": 178
+        },
+        {
+          "id": 179,
+          "img": "a851a59ddd124f1e892485df36b6aac9.png",
+          "isRecom": 0,
+          "name": "儿童玩乐",
+          "supId": 178
+        },
+        {
+          "id": 1334,
+          "img": "74955ff2b9d9418b87ee2599cde48b18.jpg",
+          "isRecom": 0,
+          "name": "童车童床",
+          "supId": 178
+        },
+        {
+          "id": 1335,
+          "img": "602852b1cb164aedb3a8cef839366bcc.jpg",
+          "isRecom": 0,
+          "name": "儿童箱包",
+          "supId": 178
+        }
+      ],
+      "id": 178,
+      "img": "",
+      "isRecom": 0,
+      "name": "母婴用品",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 181,
+          "img": "124686efd19543078d4bd67c6bc4f231.jpg",
+          "isRecom": 0,
+          "name": "健身器材",
+          "supId": 180
+        },
+        {
+          "id": 182,
+          "img": "27daaaf4eeff498481baf90c05c879df.png",
+          "isRecom": 0,
+          "name": "骑行工具",
+          "supId": 180
+        },
+        {
+          "id": 485,
+          "img": "816a2994926a438894a46a3d8c3df227.jpg",
+          "isRecom": 0,
+          "name": "户外露营",
+          "supId": 180
+        },
+        {
+          "id": 1320,
+          "img": "010b8b0cfbd04438b6c19b58996f10d2.jpg",
+          "isRecom": 0,
+          "name": "体育器材",
+          "supId": 180
+        }
+      ],
+      "id": 180,
+      "img": "",
+      "isRecom": 0,
+      "name": "运动户外",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 542,
+          "img": "89dd924c39b141ee873307abbe269f15.jpg",
+          "isRecom": 0,
+          "name": "影音娱乐",
+          "supId": 132
+        },
+        {
+          "id": 1283,
+          "img": "9710af5f925b4cf3a87ab7f340d089ab.png",
+          "isRecom": 0,
+          "name": "3C数码",
+          "supId": 132
+        },
+        {
+          "id": 532,
+          "img": "94be6de808e64bd183db6e1aa8a5e787.jpg",
+          "isRecom": 0,
+          "name": "智能安防",
+          "supId": 132
+        }
+      ],
+      "id": 132,
+      "img": "",
+      "isRecom": 0,
+      "name": "数码专区",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 1352,
+          "img": "6d083fa644fe44f899bab2f2e943b6d6.jpg",
+          "isRecom": 0,
+          "name": "潮汕风味",
+          "supId": 1351
+        },
+        {
+          "id": 1353,
+          "img": "761bb39bc635451a9de351663c7e5110.jpg",
+          "isRecom": 0,
+          "name": "俄罗斯进口",
+          "supId": 1351
+        },
+        {
+          "id": 1354,
+          "img": "b205e6c287964ef480edea075e712dac.jpg",
+          "isRecom": 0,
+          "name": "微醺果酒",
+          "supId": 1351
+        }
+      ],
+      "id": 1351,
+      "img": "",
+      "isRecom": 0,
+      "name": "助农产品",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 1306,
+          "img": "70f21aafcb704579a4aa048660172cb4.png",
+          "isRecom": 0,
+          "name": " 净水器",
+          "supId": 1304
+        },
+        {
+          "id": 1307,
+          "img": "ef664be379414fbaa3958318e8edf269.png",
+          "isRecom": 0,
+          "name": " 净化器",
+          "supId": 1304
+        },
+        {
+          "id": 1308,
+          "img": "e71b920f86ac4d4b97ddf0c6a396140c.png",
+          "isRecom": 0,
+          "name": " 生活日用",
+          "supId": 1304
+        },
+        {
+          "id": 1311,
+          "img": "cf2aa732050545be82fd251a540d5ce1.png",
+          "isRecom": 0,
+          "name": " 厨房用品",
+          "supId": 1304
+        },
+        {
+          "id": 1309,
+          "img": "9143aabc087746c1a8706ef29875c864.jpg",
+          "isRecom": 0,
+          "name": " 小家电",
+          "supId": 1304
+        },
+        {
+          "id": 1305,
+          "img": "7dccb3c41c7d41d7a3ea82b1df539fd6.jpg",
+          "isRecom": 0,
+          "name": "其他",
+          "supId": 1304
+        }
+      ],
+      "id": 1304,
+      "img": "",
+      "isRecom": 0,
+      "name": "限量直降",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 1324,
+          "img": "d0ca038ee949426cb3c8e2060e236dd5.jpg",
+          "isRecom": 0,
+          "name": "盲盒礼品",
+          "supId": 1323
+        },
+        {
+          "id": 1329,
+          "img": "dbf88beb592048e58d954beb2515888e.jpg",
+          "isRecom": 0,
+          "name": "高端定制",
+          "supId": 1323
+        }
+      ],
+      "id": 1323,
+      "img": "",
+      "isRecom": 1,
+      "name": "礼品盲盒",
+      "supId": -1
+    },
+    {
+      "children": [
+        {
+          "id": 1343,
+          "img": "849a99b41de54598af052656f782de74.jpg",
+          "isRecom": 0,
+          "name": "中性礼盒",
+          "supId": 1342
+        },
+        {
+          "id": 1349,
+          "img": "dec23b536bfc4b5c8d943efc113f93a4.jpg",
+          "isRecom": 0,
+          "name": "个性化礼盒",
+          "supId": 1342
+        }
+      ],
+      "id": 1342,
+      "img": "",
+      "isRecom": 0,
+      "name": "礼品定制",
+      "supId": -1
+    }
+  ],
+  "code": 0
+}
