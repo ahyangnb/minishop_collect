@@ -130,7 +130,7 @@ def get_det_slider_img_list(goodsData):
     # result list of img.
     result_img_list = []
     # add main pic
-    result_img_list.append(goodsData['itemMainImg'])
+    result_img_list.append(get_img_h1(goodsData['itemMainImg']))
 
     slider_image_list = goodsData['imgs']
 
