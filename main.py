@@ -9,7 +9,7 @@ import my_data
 # 存储到自己的服务器的类别id
 storeCategoryId = '63'
 
-token = "dbc948bd94e94654b1355b25bcf4111d"
+token = "d5d2520e37f94ebcb8c9598e094f90c7"
 headersData = {
     "Host": "bjsc.szbaoly.com",
     "appId": "wxeed6d656b89aeef3",
@@ -100,10 +100,10 @@ def fetchCategory(cursor, db, cateData):
             print("[Un need] already contain", goods_result_id)
 
         # avoid protect so sleep.
-        import time
-        sec_time = 1
-        print('sleep time:', str(sec_time), 'seconds')
-        time.sleep(sec_time)
+        # import time
+        # sec_time = 1
+        # print('sleep time:', str(sec_time), 'seconds')
+        # time.sleep(sec_time)
 
     return 1
 
