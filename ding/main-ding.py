@@ -4,37 +4,33 @@ import sys
 import requests  # 导入requests包
 import json
 import pymysql
-import my_data
+import ding_data
 
-# 存储到自己的服务器的类别id
-storeCategoryId = '63'
+# 存储到自己的服务器的类别id【闲置类别】
+storeCategoryId = '90'
 
 token = "d5d2520e37f94ebcb8c9598e094f90c7"
+tokenId = "A00EB35092F6C561726BDDC53DD106CB"
+sign = "9A20C8EECF06C6191A061EE513906C96"
 headersData = {
-    "Host": "bjsc.szbaoly.com",
-    "appId": "wxeed6d656b89aeef3",
-    "Accept": "*/*",
-    "appletVersion": "2.0.7",
-    "terminal": "2",
-    "cId": "1",
-    "Accept-Language": "en-us",
-    "Accept-Encoding": "gzip, deflate, br",
-    "token": token,
+    "Host": "7ddapi.7dingdong.com",
     "Content-Type": "application/x-www-form-urlencoded",
-    "Referer": "https",
-    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E217 MicroMessenger/6.8.0(0x16080000) NetType/WIFI Language/en Branch/Br_trunk MiniProgramEnv/Mac",
+    "Accept": "*/*",
     "Connection": "keep-alive",
-    "client": "1",
-    "aId": "677"
+    "Cookie": "PHPSESSID=0bkh1700pal6fig03qqpv7kp22",
+    "User-Agent": "ShunDao/3.7.2 (iPhone; iOS 16.2; Scale/3.00)",
+    "Accept-Language": "en-CN;q=1,zh-Hans-CN;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Content-Length": "0"
 }
 
 
 def get_img_h1(url):
-    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/h1'
+    return 'http://7dd-statics.7dingdong.com/' + str(url).replace('"', '')
 
 
 def get_img_des(url):
-    return 'http://oss-hxq-prod.szbaoly.com/bjsc/goods/' + str(url).replace('"', '') + '?x-oss-process=style/gd'
+    return 'http://7dd-statics.7dingdong.com/' + str(url).replace('"', '')
 
 
 def get_video_full_url(url):
@@ -47,17 +43,19 @@ def get_video_full_url(url):
 
 
 # 商品详情
-def getGoodsDet(id=13261):
-    url = 'https://bjsc.szbaoly.com/api/agent/getGoodsDetail?id=' + str(
-        id) + '&selectType=0&sceneType=&sceneId='
+def getGoodsDet(id):
+    url = 'https://7ddapi.7dingdong.com/b2bv3/detail?company=1&device=1&' \
+          'id='+str(id)+'&' \
+          'tokenId=' + str(tokenId) + '&version=3.7.2&sign=' + str(sign)
+
     # 请求表单数据
     response = requests.post(url, headers=headersData, verify=False)
     # 将Json格式字符串转字典
     content = json.loads(response.text)
     print("HTTP::getGoodsDet::" + str(content))
-    if content['code'] != 200 & content['code'] != 0:
+    if content['status'] != 200 & content['status'] != 0:
         return None
-    return content['result']
+    return content['data']
 
 
 # 规格处理
@@ -68,8 +66,11 @@ def getGoodsDet(id=13261):
 
 # 根据类别获取商品列表
 def getGoodsListOfCategory(currentPage, twoCategoryId):
-    url = 'https://bjsc.szbaoly.com/api/agent/pageGoods?current=' + str(
-        currentPage) + '&size=10&total=-1&twoCategoryId=' + str(twoCategoryId) + '&keyword='
+    url = 'https://7ddapi.7dingdong.com/area/getGoods?brand_id=&brand_name=&' \
+          'cate_id=2&company=1&device=1&ent=&entId=&goods_type=&is_vip=&keywords=&order=default&' \
+          'page=' + str(currentPage) + '&position=classification&sort=&storeSpecial=0&sub_cate_id=' + \
+          str(twoCategoryId) + '&tokenId=' + str(tokenId) + '&version=3.7.2&sign=' + str(sign)
+
     # 请求表单数据
     response = requests.post(url, headers=headersData, verify=False)
     # 将Json格式字符串转字典
@@ -80,23 +81,23 @@ def getGoodsListOfCategory(currentPage, twoCategoryId):
 
 
 def fetchCategory(cursor, db, cateData):
-    if cateData['result']['records'] is None:
+    if cateData['data'] is None:
         return 0
-    if cateData['result']['records'] == '[]':
+    if cateData['data'] == '[]':
         return 0
-    print('fetch category All data ', cateData['result']['records'])
-    records = cateData['result']['records']
+    print('fetch category All data ', cateData['data'])
+    records = cateData['data']
     for currentGoods in records:
-        goodsData = getGoodsDet(currentGoods['id'])
-        search_goods_result = searchGoods(cursor, goodsData['name'])
+        goodsData = getGoodsDet(currentGoods['goods_id'])
+        search_goods_result = searchGoods(cursor, goodsData['goods']['goods_name'])
         if search_goods_result is not None:
             print("Can inner data")
             goods_id = innsertData(cursor, db, goodsData)
             if goods_id is not None:
                 insert_des(goods_id, goodsData, cursor, db)
         else:
-            print("Un need ", goodsData['name'])
-            goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
+            print("Un need ", goodsData['goods']['goods_name'])
+            goods_result_id = get_insert_goods_id(cursor, goodsData['goods']['goods_name'])
             print("[Un need] already contain", goods_result_id)
 
         # avoid protect so sleep.
@@ -130,18 +131,13 @@ def get_det_slider_img_list(goodsData):
     # result list of img.
     result_img_list = []
     # add main pic
-    result_img_list.append(get_img_h1(goodsData['itemMainImg']))
+    result_img_list.append(get_img_h1(goodsData['goods']['default_image']))
 
-    slider_image_list = goodsData['imgs']
-
-    if ', ' in slider_image_list:
-        res = slider_image_list.strip('][').split(', ')
-    else:
-        res = slider_image_list.strip('][').split(',')
+    slider_image_list = goodsData['img']
 
     # Result and its type
-    for str_item in res:
-        str_item_new = get_img_h1(str_item)
+    for str_item in slider_image_list:
+        str_item_new = get_img_h1(str_item['image_url'])
         result_img_list.append(str_item_new)
 
     # dump data
@@ -153,7 +149,7 @@ def get_det_slider_img_list(goodsData):
 def get_det_decription_img_list(goodsData):
     # result list of img.
     result_des_img_list = []
-    des_image_list = goodsData['detailImgs']
+    des_image_list = goodsData['goods']['default_image']
 
     if ', ' in des_image_list:
         res = des_image_list.strip('][').split(', ')
@@ -168,6 +164,8 @@ def get_det_decription_img_list(goodsData):
 
 
 def innsertData(cursor, db, goodsData):
+    goods = goodsData['goods']
+
     # SQL inner oprate.
     import time
     sql = """INSERT INTO `eb_store_product` (`mer_id`, `image`, `recommend_image`, `slider_image`, `store_name`, `store_info`
@@ -182,17 +180,17 @@ def innsertData(cursor, db, goodsData):
  , '%s', '%s', '%s', %s, %s, '%s',
   '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s');""" % (
         # Real value inner.
-        0, get_img_h1(goodsData['itemMainImg']),
+        0, get_img_h1(goods['default_image']),
         '',
         str(get_det_slider_img_list(goodsData)),
-        goodsData['name'],
-        goodsData['name'],
+        goods['goods_name'],
+        goods['goods_name'],
         '', '',
-        storeCategoryId, str(goodsData['marketPrice']), str(goodsData['currVipPrice']), str(goodsData['marketPrice']),
+        storeCategoryId, str(goods['enjoy_price']), str(goods['retail_price']), str(goods['enjoy_price']),
         '0.00',
         # unit_name
-        goodsData['unit'],
-        0, goodsData['sales'], goodsData['stock'],
+        "个",
+        0, goods['salesNum'], goods['spec'][0]['stock'],
         # is_show
         0, 0, 0, 0, 0, 0,
         # virtual_type
@@ -200,15 +198,15 @@ def innsertData(cursor, db, goodsData):
         # add_time   1642241487
         time.time(), 1, 0, 0, '0.00',
         # cost
-        str(goodsData['currVipPrice']), 0, 0, 1, 0, 1, 0, 0, '', '',
+        str(goods['retail_price']), 0, 0, 1, 0, 1, 0, 0, '', '',
         # video_link
-        get_video_full_url(goodsData['goodsVideo']),
+        "",
         1,
         # todo spec_type 规格 0单 1多
         1,
         '0,1,2,3',
         # spu
-        str(goodsData['goodsId']), '', '', '',
+        str(goods['goods_id']), '', '', '',
         # vip_product 是否会员专属商品
         0, 0, 0, 0, 0,
         # logistics
@@ -222,7 +220,7 @@ def innsertData(cursor, db, goodsData):
         db.commit()
         print("innert Data success.")
 
-        goods_result_id = get_insert_goods_id(cursor, goodsData['name'])
+        goods_result_id = get_insert_goods_id(cursor, goods['goods_name'])
         print("data innser success. id is ", goods_result_id)
         return goods_result_id
     except:
@@ -301,12 +299,12 @@ def optiomSql():
     data = cursor.fetchone()
     print("Database version : %s " % data)
 
-    for categoryIdValue in my_data.categoryList:
+    for categoryIdValue in ding_data.categoryList:
         # Get category data.
         currentPage = 1
-        maxPage = 1
+        # maxPage = 1
         cateData = getGoodsListOfCategory(currentPage, categoryIdValue)
-        maxPage = cateData['result']['pages']
+        maxPage = 3
         fetchCategory(cursor, db, cateData)
 
         for index in range(maxPage):
